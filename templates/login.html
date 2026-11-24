@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Login · Village People Management</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="login-wrap">
+    <section class="login-card">
+      <div class="brand">Village People Management</div>
+      <p class="sub">Administrator sign in</p>
+      {% with messages=get_flashed_messages(with_categories=true) %}
+        {% for cat,msg in messages %}<div class="flash {{ cat }}">{{ msg }}</div>{% endfor %}
+      {% endwith %}
+      {% if setup_missing %}
+        <div class="flash error">ADMIN_PASSWORD is not configured. Add a strong ADMIN_PASSWORD in Railway → Web Service → Variables, then redeploy.</div>
+      {% else %}
+        <form method="post" class="login-form">
+          <label for="password">Admin password</label>
+          <input id="password" type="password" name="password" autocomplete="current-password" required autofocus>
+          <button class="btn primary" type="submit">Sign In</button>
+        </form>
+      {% endif %}
+    </section>
+  </main>
+</body>
+</html>
